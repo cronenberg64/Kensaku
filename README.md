@@ -1,4 +1,4 @@
-# Kensaku (検索) - Japanese Academic Research Collaboration Platform
+# Kensaku (研作) - Japanese Academic Research Collaboration Platform
 
 Kensaku is a mobile and web platform designed to enhance research paper output among university students and faculty in Japan. The platform addresses key challenges in academic research by providing tools for topic discovery, collaboration, and publishing guidance.
 

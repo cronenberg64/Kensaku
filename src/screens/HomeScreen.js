@@ -1,77 +1,25 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  SafeAreaView,
-} from 'react-native';
 
-const HomeScreen = () => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <View style={styles.header}>
-          <Text style={styles.title}>Kensaku</Text>
-          <Text style={styles.subtitle}>Research Collaboration Platform</Text>
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Trending Topics</Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {['AI in Education', 'Sustainable Technology', 'Quantum Computing'].map((topic, index) => (
-              <TouchableOpacity key={index} style={styles.topicCard}>
-                <Text style={styles.topicText}>{topic}</Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Recent Collaborations</Text>
-          {['Machine Learning Research', 'Environmental Studies', 'Data Science'].map((collab, index) => (
-            <TouchableOpacity key={index} style={styles.collabCard}>
-              <Text style={styles.collabTitle}>{collab}</Text>
-              <Text style={styles.collabSubtitle}>Looking for collaborators</Text>
-            </TouchableOpacity>
-          ))}
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Publishing Resources</Text>
-          <TouchableOpacity style={styles.resourceCard}>
-            <Text style={styles.resourceTitle}>Journal Templates</Text>
-            <Text style={styles.resourceSubtitle}>Access common templates</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.resourceCard}>
-            <Text style={styles.resourceTitle}>Submission Guidelines</Text>
-            <Text style={styles.resourceSubtitle}>Learn about requirements</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
-
-const styles = StyleSheet.create({
+const styles = {
   container: {
-    flex: 1,
+    minHeight: '100vh',
     backgroundColor: '#f5f5f5',
+    fontFamily: 'Inter, sans-serif',
   },
   header: {
     padding: 20,
     backgroundColor: '#007AFF',
+    color: 'white',
   },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: 'white',
+    margin: 0,
   },
   subtitle: {
     fontSize: 16,
-    color: 'white',
     opacity: 0.8,
+    margin: 0,
   },
   section: {
     padding: 20,
@@ -86,11 +34,8 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     marginRight: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+    display: 'inline-block',
   },
   topicText: {
     fontSize: 16,
@@ -101,11 +46,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     marginBottom: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
   },
   collabTitle: {
     fontSize: 16,
@@ -121,11 +62,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     marginBottom: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
   },
   resourceTitle: {
     fontSize: 16,
@@ -136,6 +73,50 @@ const styles = StyleSheet.create({
     color: '#666',
     marginTop: 5,
   },
-});
+};
+
+const HomeScreen = () => {
+  return (
+    <div style={styles.container}>
+      <header style={styles.header}>
+        <h1 style={styles.title}>Kensaku</h1>
+        <p style={styles.subtitle}>Research Collaboration Platform</p>
+      </header>
+
+      <section style={styles.section}>
+        <div style={styles.sectionTitle}>Trending Topics</div>
+        <div style={{ whiteSpace: 'nowrap', overflowX: 'auto' }}>
+          {['AI in Education', 'Sustainable Technology', 'Quantum Computing'].map((topic, index) => (
+            <button key={index} style={styles.topicCard}>
+              <span style={styles.topicText}>{topic}</span>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section style={styles.section}>
+        <div style={styles.sectionTitle}>Recent Collaborations</div>
+        {['Machine Learning Research', 'Environmental Studies', 'Data Science'].map((collab, index) => (
+          <div key={index} style={styles.collabCard}>
+            <div style={styles.collabTitle}>{collab}</div>
+            <div style={styles.collabSubtitle}>Looking for collaborators</div>
+          </div>
+        ))}
+      </section>
+
+      <section style={styles.section}>
+        <div style={styles.sectionTitle}>Publishing Resources</div>
+        <div style={styles.resourceCard}>
+          <div style={styles.resourceTitle}>Journal Templates</div>
+          <div style={styles.resourceSubtitle}>Access common templates</div>
+        </div>
+        <div style={styles.resourceCard}>
+          <div style={styles.resourceTitle}>Submission Guidelines</div>
+          <div style={styles.resourceSubtitle}>Learn about requirements</div>
+        </div>
+      </section>
+    </div>
+  );
+};
 
 export default HomeScreen; 

@@ -1,14 +1,125 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  SafeAreaView,
-  TextInput,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MdAdd } from 'react-icons/md';
+
+const styles = {
+  container: {
+    minHeight: '100vh',
+    backgroundColor: '#f5f5f5',
+    fontFamily: 'Inter, sans-serif',
+    position: 'relative',
+  },
+  header: {
+    padding: 20,
+    backgroundColor: '#007AFF',
+    color: 'white',
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    margin: 0,
+    marginBottom: 15,
+  },
+  tabContainer: {
+    display: 'flex',
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    borderRadius: 10,
+    padding: 5,
+    marginBottom: 10,
+  },
+  tab: {
+    flex: 1,
+    padding: '10px 0',
+    textAlign: 'center',
+    borderRadius: 8,
+    cursor: 'pointer',
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 500,
+    background: 'none',
+    border: 'none',
+    outline: 'none',
+    transition: 'background 0.2s',
+  },
+  activeTab: {
+    backgroundColor: 'white',
+    color: '#007AFF',
+  },
+  content: {
+    flex: 1,
+  },
+  section: {
+    padding: 20,
+  },
+  card: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 15,
+    marginBottom: 15,
+    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+  },
+  cardHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  statusContainer: {
+    backgroundColor: '#E3F2FD',
+    padding: '5px 10px',
+    borderRadius: 15,
+    fontSize: 12,
+    color: '#007AFF',
+    fontWeight: 500,
+  },
+  description: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 10,
+  },
+  membersText: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 5,
+  },
+  requester: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 10,
+  },
+  tagsContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '8px',
+  },
+  tag: {
+    backgroundColor: '#E3F2FD',
+    padding: '5px 10px',
+    borderRadius: 15,
+    fontSize: 12,
+    color: '#007AFF',
+  },
+  fab: {
+    position: 'fixed',
+    right: 20,
+    bottom: 20,
+    backgroundColor: '#007AFF',
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    boxShadow: '0 2px 4px rgba(0,0,0,0.25)',
+    cursor: 'pointer',
+    border: 'none',
+    outline: 'none',
+    zIndex: 100,
+  },
+};
 
 const CollaborationScreen = () => {
   const [activeTab, setActiveTab] = useState('projects');
@@ -48,215 +159,73 @@ const CollaborationScreen = () => {
   ];
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Collaboration</Text>
-        <View style={styles.tabContainer}>
-          <TouchableOpacity
-            style={[styles.tab, activeTab === 'projects' && styles.activeTab]}
-            onPress={() => setActiveTab('projects')}
+    <div style={styles.container}>
+      <header style={styles.header}>
+        <h1 style={styles.title}>Collaboration</h1>
+        <div style={styles.tabContainer}>
+          <button
+            style={{ ...styles.tab, ...(activeTab === 'projects' ? styles.activeTab : {}) }}
+            onClick={() => setActiveTab('projects')}
           >
-            <Text style={[styles.tabText, activeTab === 'projects' && styles.activeTabText]}>
-              Projects
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.tab, activeTab === 'requests' && styles.activeTab]}
-            onPress={() => setActiveTab('requests')}
+            Projects
+          </button>
+          <button
+            style={{ ...styles.tab, ...(activeTab === 'requests' ? styles.activeTab : {}) }}
+            onClick={() => setActiveTab('requests')}
           >
-            <Text style={[styles.tabText, activeTab === 'requests' && styles.activeTabText]}>
-              Requests
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+            Requests
+          </button>
+        </div>
+      </header>
 
-      <ScrollView style={styles.content}>
+      <main style={styles.content}>
         {activeTab === 'projects' ? (
-          <View style={styles.section}>
+          <section style={styles.section}>
             {projects.map((project, index) => (
-              <TouchableOpacity key={index} style={styles.card}>
-                <View style={styles.cardHeader}>
-                  <Text style={styles.cardTitle}>{project.title}</Text>
-                  <View style={styles.statusContainer}>
-                    <Text style={styles.statusText}>{project.status}</Text>
-                  </View>
-                </View>
-                <Text style={styles.description}>{project.description}</Text>
-                <View style={styles.membersContainer}>
-                  <Text style={styles.membersText}>
-                    {project.members} members • Looking for:
-                  </Text>
-                  <View style={styles.tagsContainer}>
-                    {project.needed.map((role, roleIndex) => (
-                      <View key={roleIndex} style={styles.tag}>
-                        <Text style={styles.tagText}>{role}</Text>
-                      </View>
-                    ))}
-                  </View>
-                </View>
-              </TouchableOpacity>
-            ))}
-          </View>
-        ) : (
-          <View style={styles.section}>
-            {requests.map((request, index) => (
-              <TouchableOpacity key={index} style={styles.card}>
-                <View style={styles.cardHeader}>
-                  <Text style={styles.cardTitle}>{request.title}</Text>
-                  <View style={styles.statusContainer}>
-                    <Text style={styles.statusText}>{request.status}</Text>
-                  </View>
-                </View>
-                <Text style={styles.requester}>
-                  {request.requester} • {request.university}
-                </Text>
-                <View style={styles.tagsContainer}>
-                  {request.expertise.map((skill, skillIndex) => (
-                    <View key={skillIndex} style={styles.tag}>
-                      <Text style={styles.tagText}>{skill}</Text>
-                    </View>
+              <div key={index} style={styles.card}>
+                <div style={styles.cardHeader}>
+                  <span style={styles.cardTitle}>{project.title}</span>
+                  <span style={styles.statusContainer}>{project.status}</span>
+                </div>
+                <div style={styles.description}>{project.description}</div>
+                <div style={styles.membersText}>
+                  {project.members} members • Looking for:
+                </div>
+                <div style={styles.tagsContainer}>
+                  {project.needed.map((role, roleIndex) => (
+                    <span key={roleIndex} style={styles.tag}>{role}</span>
                   ))}
-                </View>
-              </TouchableOpacity>
+                </div>
+              </div>
             ))}
-          </View>
+          </section>
+        ) : (
+          <section style={styles.section}>
+            {requests.map((request, index) => (
+              <div key={index} style={styles.card}>
+                <div style={styles.cardHeader}>
+                  <span style={styles.cardTitle}>{request.title}</span>
+                  <span style={styles.statusContainer}>{request.status}</span>
+                </div>
+                <div style={styles.requester}>
+                  {request.requester} • {request.university}
+                </div>
+                <div style={styles.tagsContainer}>
+                  {request.expertise.map((skill, skillIndex) => (
+                    <span key={skillIndex} style={styles.tag}>{skill}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </section>
         )}
-      </ScrollView>
+      </main>
 
-      <TouchableOpacity style={styles.fab}>
-        <Icon name="add" size={24} color="white" />
-      </TouchableOpacity>
-    </SafeAreaView>
+      <button style={styles.fab} aria-label="Add">
+        <MdAdd size={24} color="white" />
+      </button>
+    </div>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-  },
-  header: {
-    padding: 20,
-    backgroundColor: '#007AFF',
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: 'white',
-    marginBottom: 15,
-  },
-  tabContainer: {
-    flexDirection: 'row',
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    borderRadius: 10,
-    padding: 5,
-  },
-  tab: {
-    flex: 1,
-    paddingVertical: 10,
-    alignItems: 'center',
-    borderRadius: 8,
-  },
-  activeTab: {
-    backgroundColor: 'white',
-  },
-  tabText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '500',
-  },
-  activeTabText: {
-    color: '#007AFF',
-  },
-  content: {
-    flex: 1,
-  },
-  section: {
-    padding: 20,
-  },
-  card: {
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: 15,
-    marginBottom: 15,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  cardHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  statusContainer: {
-    backgroundColor: '#E3F2FD',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 15,
-  },
-  statusText: {
-    color: '#007AFF',
-    fontSize: 12,
-    fontWeight: '500',
-  },
-  description: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 10,
-  },
-  membersContainer: {
-    marginTop: 10,
-  },
-  membersText: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 5,
-  },
-  requester: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 10,
-  },
-  tagsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  tag: {
-    backgroundColor: '#E3F2FD',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 15,
-    marginRight: 8,
-    marginBottom: 8,
-  },
-  tagText: {
-    color: '#007AFF',
-    fontSize: 12,
-  },
-  fab: {
-    position: 'absolute',
-    right: 20,
-    bottom: 20,
-    backgroundColor: '#007AFF',
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-  },
-});
 
 export default CollaborationScreen; 
