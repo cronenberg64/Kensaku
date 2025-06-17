@@ -1,0 +1,15 @@
+{
+  "buildCommand": "yarn install && yarn build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "installCommand": "yarn install",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ]
+} 
