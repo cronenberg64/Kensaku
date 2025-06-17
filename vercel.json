@@ -2,37 +2,25 @@
   "version": 2,
   "builds": [
     {
-      "src": "package.json",
+      "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "build"
+        "distDir": "dist"
       }
+    },
+    {
+      "src": "backend/main.py",
+      "use": "@vercel/python"
     }
   ],
   "routes": [
     {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
-    {
-      "src": "/favicon.ico",
-      "dest": "/favicon.ico"
-    },
-    {
-      "src": "/manifest.json",
-      "dest": "/manifest.json"
-    },
-    {
-      "src": "/logo192.png",
-      "dest": "/logo192.png"
-    },
-    {
-      "src": "/logo512.png",
-      "dest": "/logo512.png"
+      "src": "/api/(.*)",
+      "dest": "backend/main.py"
     },
     {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "frontend/$1"
     }
   ]
 } 

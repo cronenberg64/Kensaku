@@ -1,6 +1,8 @@
 # Kensaku (研作) - Japanese Academic Research Collaboration Platform
 
-Kensaku is a mobile and web platform designed to enhance research paper output among university students and faculty in Japan. The platform addresses key challenges in academic research by providing tools for topic discovery, collaboration, and publishing guidance.
+Kensaku is a web platform designed to enhance research paper output among university students and faculty in Japan. The platform addresses key challenges in academic research by providing tools for topic discovery, collaboration, and publishing guidance.
+
+You can visit the webpage here: https://kensaku-delta.vercel.app
 
 ## Features
 
@@ -17,22 +19,29 @@ Kensaku is a mobile and web platform designed to enhance research paper output a
 
 ## Tech Stack
 
-- **Frontend**: React Native (Mobile & Web)
-- **Backend**: Firebase
-  - Authentication
-  - Firestore Database
-  - Cloud Functions
-- **Future Backend**: Python/Java (for advanced features)
+### Frontend
+- **Framework**: Vite + React + TypeScript
+- **Styling**: Tailwind CSS
+- **Package Manager**: Yarn
+- **Web Server**: Nginx
+
+### Backend
+- **Framework**: FastAPI (Python)
+- **Database**: PostgreSQL
+- **API Documentation**: OpenAPI/Swagger
+
+### Infrastructure
+- **Containerization**: Docker
+- **Orchestration**: Docker Compose
+- **Deployment**: Vercel
 
 ## Getting Started
 
 ### Prerequisites
+- Docker and Docker Compose
 - Node.js (v16 or higher)
-- npm or yarn
-- React Native CLI
-- Firebase CLI
-- Xcode (for iOS development)
-- Android Studio (for Android development)
+- Python 3.11+
+- Yarn package manager
 
 ### Installation
 
@@ -42,51 +51,44 @@ git clone [repository-url]
 cd kensaku
 ```
 
-2. Install dependencies:
+2. Start the development environment:
 ```bash
-npm install
-# or
-yarn install
+make dev
 ```
 
-3. Set up Firebase:
-- Create a new Firebase project
-- Enable Authentication and Firestore
-- Add your Firebase configuration to `src/config/firebase.js`
+This will:
+- Build and start the frontend container
+- Build and start the backend container
+- Set up the development environment
 
-4. Start the development server:
-```bash
-npm start
-# or
-yarn start
-```
-
-5. Run on your preferred platform:
-```bash
-# For iOS
-npm run ios
-# For Android
-npm run android
-# For Web
-npm run web
-```
+3. Access the applications:
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:8000
+- API Documentation: http://localhost:8000/docs
 
 ## Project Structure
 
 ```
 kensaku/
-├── src/
-│   ├── components/     # Reusable UI components
-│   ├── screens/        # Screen components
-│   ├── navigation/     # Navigation configuration
-│   ├── services/       # API and Firebase services
-│   ├── utils/          # Helper functions
-│   ├── config/         # Configuration files
-│   └── assets/         # Images, fonts, etc.
-├── android/           # Android specific files
-├── ios/              # iOS specific files
-└── web/              # Web specific files
+├── frontend/          # Vite + React frontend
+│   ├── src/          # Source code
+│   ├── public/       # Static assets
+│   └── Dockerfile    # Frontend container configuration
+├── backend/          # FastAPI backend
+│   ├── app/         # Application code
+│   └── Dockerfile   # Backend container configuration
+├── docker-compose.yml # Container orchestration
+└── Makefile         # Development commands
 ```
+
+## Development
+
+### Available Make Commands
+- `make dev`: Start development environment
+- `make build`: Build all containers
+- `make down`: Stop all containers
+- `make logs`: View container logs
+- `make clean`: Remove all containers and volumes
 
 ## Contributing
 
