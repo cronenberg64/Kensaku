@@ -1,14 +1,16 @@
 {
-  "buildCommand": "yarn install && yarn build",
+  "buildCommand": "yarn install --immutable && yarn build",
   "outputDirectory": "dist",
   "framework": "vite",
-  "installCommand": "yarn install",
+  "installCommand": "yarn install --immutable",
   "builds": [
     {
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist"
+        "distDir": "dist",
+        "buildCommand": "yarn build",
+        "installCommand": "yarn install --immutable"
       }
     }
   ]
