@@ -2,8 +2,6 @@
 
 Kensaku is a web platform designed to enhance research paper output among university students and faculty in Japan. The platform addresses key challenges in academic research by providing tools for topic discovery, collaboration, and publishing guidance.
 
-You can visit the webpage here: https://kensaku-delta.vercel.app
-
 ## Features
 
 ### Core Features (MVP)
@@ -23,7 +21,7 @@ You can visit the webpage here: https://kensaku-delta.vercel.app
 - **Framework**: Vite + React + TypeScript
 - **Styling**: Tailwind CSS
 - **Package Manager**: npm
-- **Web Server**: Nginx
+- **Container**: Docker
 
 ### Backend
 - **Framework**: FastAPI (Python)
@@ -39,9 +37,9 @@ You can visit the webpage here: https://kensaku-delta.vercel.app
 
 ### Prerequisites
 - Docker and Docker Compose
-- Node.js (v16 or higher)
+- Node.js (v18.17.0 or higher)
 - Python 3.11+
-- Yarn package manager
+- npm
 
 ### Installation
 
@@ -53,7 +51,7 @@ cd kensaku
 
 2. Start the development environment:
 ```bash
-make dev
+docker-compose up
 ```
 
 This will:
@@ -73,11 +71,13 @@ kensaku/
 ├── frontend/          # Vite + React frontend
 │   ├── src/          # Source code
 │   ├── public/       # Static assets
-│   └── Dockerfile    # Frontend container configuration
+│   ├── Dockerfile    # Frontend container configuration
+│   └── .dockerignore # Docker ignore rules
 ├── backend/          # FastAPI backend
 │   ├── app/         # Application code
 │   └── Dockerfile   # Backend container configuration
 ├── docker-compose.yml # Container orchestration
+├── railway.toml      # Railway deployment configuration
 └── Makefile         # Development commands
 ```
 
@@ -89,6 +89,15 @@ kensaku/
 - `make down`: Stop all containers
 - `make logs`: View container logs
 - `make clean`: Remove all containers and volumes
+
+## Deployment
+
+The application is deployed on Railway using Docker containers. The deployment process is automated through Railway's CI/CD pipeline.
+
+### Deployment Steps
+1. Push changes to the main branch
+2. Railway automatically builds and deploys the containers
+3. The application is available at the Railway-provided URL
 
 ## Contributing
 

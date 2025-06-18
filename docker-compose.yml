@@ -1,23 +1,44 @@
-#!/bin/bash
+version: '3.8'
 
-# Install dependencies
-uv pip install -r requirements.txt
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
 
-# Create production environment file
-cat > .env.production << EOL
-HOST=0.0.0.0
-PORT=8000
-ENVIRONMENT=production
-CORS_ORIGINS=https://your-domain.com,https://www.your-domain.com
-FIREBASE_API_KEY=your-api-key
-FIREBASE_AUTH_DOMAIN=your-auth-domain
-FIREBASE_PROJECT_ID=your-project-id
-FIREBASE_STORAGE_BUCKET=your-storage-bucket
-FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
-FIREBASE_APP_ID=your-app-id
-JWT_SECRET=your-jwt-secret
-JWT_ALGORITHM=HS256
-JWT_EXPIRATION=3600
-DATABASE_URL=your-database-url
-LOG_LEVEL=INFO
-EOL
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=development
+      - PYTHONPATH=/app
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=kensaku
+      - POSTGRES_PASSWORD=kensaku
+      - POSTGRES_DB=kensaku
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data: 

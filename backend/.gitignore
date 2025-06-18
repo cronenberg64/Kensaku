@@ -40,3 +40,22 @@ coverage.xml
 
 # Uvicorn
 *.log
+
+# Add these lines to your existing .gitignore file
+# Railway-specific files (add to your existing .gitignore)
+
+# Railway environment files
+.env.railway
+.env.railway.local
+
+# Railway CLI files
+.railway/
+
+# Railway deployment logs
+railway-logs.txt
+
+# Railway database dumps
+*.sql.gz
+
+# Temporary Railway files
+.railway-*
