@@ -1,0 +1,11 @@
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+healthcheckPath = "/docs"
+healthcheckTimeout = 100
+
+[env]
+PYTHONPATH = "/app"
+ENVIRONMENT = "production" 

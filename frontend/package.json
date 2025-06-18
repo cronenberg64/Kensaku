@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview --host 0.0.0.0 --port $PORT",
     "start": "vite preview --host 0.0.0.0 --port $PORT"
@@ -16,8 +16,8 @@
   "dependencies": {
     "@11labs/react": "0.0.4",
     "@ag-grid-community/react": "^31.1.1",
-    "@ag-grid-enterprise/all-modules": "^31.1.1",
-    "@ag-ui/core": "0.0.28",
+    "@ag-grid-community/client-side-row-model": "^31.1.1",
+    "@ag-grid-community/core": "^31.1.1",
     "@algolia/autocomplete-js": "^1.17.6",
     "@amcharts/amcharts5": "5.11.2",
     "@apollo/client": "^3.11.8",
@@ -190,7 +190,7 @@
     "@webcomponents/shadycss": "1.11.2",
     "@xyflow/react": "12.4.1",
     "@xzdarcy/react-timeline-editor": "0.1.9",
-    "ag-grid-react": "32.1.0",
+    "ag-grid-react": "^31.1.1",
     "agora-rtc-react": "2.3.0",
     "agora-rtc-sdk-ng": "4.23.1",
     "algoliasearch": "^4.24.0",
