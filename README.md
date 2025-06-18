@@ -22,7 +22,7 @@ You can visit the webpage here: https://kensaku-delta.vercel.app
 ### Frontend
 - **Framework**: Vite + React + TypeScript
 - **Styling**: Tailwind CSS
-- **Package Manager**: Yarn
+- **Package Manager**: npm
 - **Web Server**: Nginx
 
 ### Backend
@@ -33,7 +33,7 @@ You can visit the webpage here: https://kensaku-delta.vercel.app
 ### Infrastructure
 - **Containerization**: Docker
 - **Orchestration**: Docker Compose
-- **Deployment**: Vercel
+- **Deployment**: Railway
 
 ## Getting Started
 

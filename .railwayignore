@@ -1,0 +1,17 @@
+.git
+.gitignore
+node_modules
+*.log
+.env
+.env.*
+.DS_Store
+README.md
+LICENSE
+.vscode
+.idea
+*.md
+__tests__
+test
+tests
+coverage
+.nyc_output 
